@@ -1,0 +1,199 @@
+#  Skyline — Full Stack Weather Application
+### PM Accelerator — AI Engineer Technical Assessment
+**Author:** Yassin Ayadi
+
+##  About PM Accelerator
+PM Accelerator is a US-based AI learning and development hub featuring award-winning AI products and mentors from top-tier companies such as Google, Meta, Apple, and Nvidia. We offer a dynamic AI PM Bootcamp, designed to empower the next generation of AI professionals through hands-on experience, mentorship, and real-world projects.
+
+##  Project Overview
+Skyline is a full-stack weather application built with React (frontend) and Python Flask (backend). It allows users to search for weather by city name, zip code, GPS coordinates, or landmarks, and provides real-time weather data, forecasts, air quality, maps, and YouTube videos about the location. All searches are saved to a SQLite database with full CRUD operations and multi-format export support.
+
+##  Features
+
+### Frontend
+-  Location search (city, zip code, GPS coordinates, landmarks)
+-  Auto-detect current location via browser geolocation
+-  Current weather (temperature, condition, feels like, humidity, wind, pressure)
+-  5-day forecast with weather icons
+-  Air quality panel (AQI index, PM2.5, PM10, CO, NO2, O3) with health advice
+-  Interactive map powered by Leaflet + OpenStreetMap (free, no billing required)
+-  YouTube videos about the searched location
+-  Search history table with Edit, Delete, and Export buttons
+-  Fully responsive design (desktop, tablet, mobile)
+-  Graceful error handling for invalid locations and API failures
+
+### Backend
+-  RESTful API built with Flask
+-  SQLite database with full CRUD operations
+-  Input validation (date ranges, location existence)
+-  Data export in 5 formats: JSON, CSV, XML, Markdown, PDF
+-  Multiple API integrations: OpenWeatherMap, YouTube Data API v3, Air Pollution API
+
+##  Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React, Vite, Axios, Leaflet, react-leaflet |
+| Backend | Python, Flask, Flask-CORS |
+| Database | SQLite |
+| Weather API | OpenWeatherMap |
+| Map | Leaflet + OpenStreetMap (free) |
+| Videos | YouTube Data API v3 |
+| Air Quality | OpenWeatherMap Air Pollution API |
+| PDF Export | ReportLab |
+
+##  Project Structure
+
+```
+project/
+ Backend/
+    app.py              # Main Flask app + all routes
+    database.py         # SQLite connection + table setup
+    models.py           # CRUD operations
+    weather_service.py  # External API calls
+    export.py           # JSON/CSV/XML/Markdown/PDF export
+    config.py           # API keys + constants (loads from .env)
+    .env                # API keys (not committed to GitHub)
+    .env.example        # Template for environment variables
+    requirements.txt    # Python dependencies
+    weather.db          # SQLite database (auto-created)
+
+ Frontend/
+     src/
+        App.jsx               # Main component + state management
+        api.js                # Centralized API service layer
+        components/
+           Header.jsx        # App header + PM Accelerator banner
+           SearchBar.jsx     # Location search input
+           WeatherCard.jsx   # Current weather display
+           ForecastCard.jsx  # Single day forecast card
+           AirQuality.jsx    # Air quality panel
+           MapView.jsx       # Leaflet interactive map
+           YoutubeVideos.jsx # YouTube video cards
+           HistoryPanel.jsx  # CRUD table + export buttons
+           ErrorMessage.jsx  # Error display
+        hooks/
+            useWindowSize.js  # Responsive design hook
+     .env                      # Frontend env variables
+     package.json
+```
+
+##  Setup & Installation
+
+### Prerequisites
+- Node.js v18+
+- Python 3.9+
+- pip
+
+### Backend Setup
+
+**1. Navigate to the Backend folder:**
+```bash
+cd Backend
+```
+
+**2. Create and activate virtual environment:**
+```bash
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Mac/Linux
+source venv/bin/activate
+```
+
+**3. Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+**4. Create your `.env` file:**
+```bash
+cp .env.example .env
+```
+Then open `.env` and fill in your API keys:
+```
+API_KEY=your_openweathermap_key
+YOUTUBE_API_KEY=your_youtube_api_key
+BASE_URL=https://api.openweathermap.org/data/2.5
+GEO_URL=https://api.openweathermap.org/geo/1.0
+```
+
+**5. Run the Flask server:**
+```bash
+python app.py
+```
+Flask will run on `http://localhost:5000`
+
+### Frontend Setup
+
+**1. Navigate to the Frontend folder:**
+```bash
+cd Frontend
+```
+
+**2. Install dependencies:**
+```bash
+npm install
+```
+
+**3. Create your `.env` file:**
+```
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+**4. Start the development server:**
+```bash
+npm run dev
+```
+React will run on `http://localhost:5173`
+
+##  API Endpoints
+
+### Weather
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/weather?location=` | Current weather |
+| GET | `/api/forecast?location=` | 5-day forecast |
+| GET | `/api/coordinates?location=` | Get lat/lon |
+| GET | `/api/airquality?lat=&lon=` | Air quality data |
+| GET | `/api/youtube?location=` | YouTube videos |
+
+### CRUD
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/searches` | Save a search |
+| GET | `/api/searches` | Get all searches |
+| PUT | `/api/searches/:id` | Update a search |
+| DELETE | `/api/searches/:id` | Delete a search |
+
+### Export
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/export/json` | Export as JSON |
+| GET | `/api/export/csv` | Export as CSV |
+| GET | `/api/export/xml` | Export as XML |
+| GET | `/api/export/markdown` | Export as Markdown |
+| GET | `/api/export/pdf` | Export as PDF |
+
+##  API Keys Required
+
+| API | Where to get it | Free tier |
+|-----|----------------|-----------|
+| OpenWeatherMap | openweathermap.org |  Yes |
+| YouTube Data API v3 | console.cloud.google.com |  Yes |
+| OpenStreetMap (Leaflet) | No key needed |  Free |
+
+##  Responsive Design
+The app uses a custom `useWindowSize` React hook to detect screen size and adapt layouts:
+- **Desktop** (1024px+): Full horizontal layout
+- **Tablet** (768-1024px): Adjusted spacing
+- **Mobile** (<768px): Stacked vertical layout, scrollable history table
+
+##  Demo Video
+[Link to demo video]
+
+##  Author
+**Yassin Ayadi**
+PM Accelerator AI Engineer Intern — Technical Assessment
