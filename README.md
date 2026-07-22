@@ -191,9 +191,3 @@ The app uses a custom `useWindowSize` React hook to detect screen size and adapt
 - **Tablet** (768-1024px): Adjusted spacing
 - **Mobile** (<768px): Stacked vertical layout, scrollable history table
 
-##  Demo Video
-[Link to demo video]
-
-##  Author
-**Yassin Ayadi**
-PM Accelerator AI Engineer Intern — Technical Assessment
